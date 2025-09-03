@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>More in - Open Source APK Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0d1b2a, #000000);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Animated stars without external image */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 3px 3px;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    @keyframes moveStars {
+      from {background-position: 0 0;}
+      to {background-position: 10000px 10000px;}
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      font-size: 2.5em;
+      font-weight: bold;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from {color: #00ffea; text-shadow: 0 0 5px #00ffea;}
+      to {color: #ff00c8; text-shadow: 0 0 20px #ff00c8;}
+    }
+
+    /* Search */
+    .search-box {
+      text-align: center;
+      margin: 20px;
+    }
+    .search-box input {
+      width: 60%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    /* Rocket */
+    .rocket {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 18px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% {transform: translateY(0);}
+      50% {transform: translateY(-15px);}
+    }
+
+    /* App Grid */
+    .app-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .card:hover {transform: scale(1.05);}
+    .card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+    }
+    .btn {
+      background: #27ae60;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🚀 More in</div>
+</header>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Search apps...">
+</div>
+
+<div class="app-list" id="app-list">
+  <!-- Open Source Apps List with direct F-Droid APK links -->
+  <div class="card" onclick="openApp('VLC Media Player', 'https://f-droid.org/repo/org.videolan.vlc_13030511.apk')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VLC_media_player_icon.png" alt="VLC">
+    <h3>VLC Player</h3>
+    <p>Media player</p>
+  </div>
+
+  <div class="card" onclick="openApp('Firefox Browser', 'https://f-droid.org/repo/org.mozilla.fennec_fdroid_120.0.0.apk')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Firefox_logo%2C_2019.svg" alt="Firefox">
+    <h3>Firefox</h3>
+    <p>Browser</p>
+  </div>
+
+  <div class="card" onclick="openApp('NewPipe', 'https://f-droid.org/repo/org.schabi.newpipe_166.apk')">
+    <img src="https://newpipe.net/img/logo.svg" alt="NewPipe">
+    <h3>NewPipe</h3>
+    <p>YouTube client (ad-free)</p>
+  </div>
+
+  <div class="card" onclick="openApp('K-9 Mail', 'https://f-droid.org/repo/com.fsck.k9_63000.apk')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/K-9_Mail_icon.png" alt="K9">
+    <h3>K-9 Mail</h3>
+    <p>Email client</p>
+  </div>
+
+  <div class="card" onclick="openApp('Amaze File Manager', 'https://f-droid.org/repo/com.amaze.filemanager_90.apk')">
+    <img src="https://f-droid.org/repo/icons-640/com.amaze.filemanager.90.png" alt="Amaze">
+    <h3>Amaze</h3>
+    <p>File manager</p>
+  </div>
+
+  <div class="card" onclick="openApp('Signal', 'https://f-droid.org/repo/org.thoughtcrime.securesms_50504.apk')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Signal-Logo.svg" alt="Signal">
+    <h3>Signal</h3>
+    <p>Secure messaging</p>
+  </div>
+
+  <div class="card" onclick="openApp('Jitsi Meet', 'https://f-droid.org/repo/org.jitsi.meet_128.apk')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Jitsi_logo.svg" alt="Jitsi">
+    <h3>Jitsi Meet</h3>
+    <p>Video conferencing</p>
+  </div>
+
+  <div class="card" onclick="openApp('Simple Gallery', 'https://f-droid.org/repo/com.simplemobiletools.gallery.pro_100.apk')">
+    <img src="https://f-droid.org/repo/icons-640/com.simplemobiletools.gallery.pro.100.png" alt="Gallery">
+    <h3>Simple Gallery</h3>
+    <p>Photo viewer</p>
+  </div>
+
+  <div class="card" onclick="openApp('KOReader', 'https://f-droid.org/repo/org.koreader.launcher_2023.08.apk')">
+    <img src="https://f-droid.org/repo/icons-640/org.koreader.launcher.2023.png" alt="KOReader">
+    <h3>KOReader</h3>
+    <p>eBook/PDF reader</p>
+  </div>
+
+  <div class="card" onclick="openApp('FBReader', 'https://f-droid.org/repo/org.geometerplus.zlibrary.ui.android_260307.apk')">
+    <img src="https://f-droid.org/repo/icons-640/org.geometerplus.zlibrary.ui.android.260307.png" alt="FBReader">
+    <h3>FBReader</h3>
+    <p>eBook reader</p>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modal-title"></h2>
+    <p>Click below to download</p>
+    <a id="download-link" class="btn" href="#" download>Download</a>
+    <br><br>
+    <button class="btn" style="background:#c0392b;" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- Rocket -->
+<div class="rocket">🚀 More in</div>
+
+<script>
+  function openApp(name, link) {
+    document.getElementById("modal-title").innerText = name;
+    document.getElementById("download-link").href = link;
+    document.getElementById("modal").style.display = "flex";
+  }
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  // Search function
+  document.getElementById("search").addEventListener("keyup", function() {
+    let filter = this.value.toLowerCase();
+    let apps = document.querySelectorAll(".card");
+    apps.forEach(app => {
+      let text = app.innerText.toLowerCase();
+      app.style.display = text.includes(filter) ? "block" : "none";
+    });
+  });
+</script>
+
+</body>
+</html>
